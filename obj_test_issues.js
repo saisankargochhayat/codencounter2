@@ -28,7 +28,7 @@ var Issue = require('./models/issueModel.js')
     lat: '20.2898973',
     long: '85.8102212'
   };
-  obj.upvotes=Math.random in range(10, 50);
+  obj.upvotes=Math.floor(Math.random() * 50) + 10;
   obj.downvotes=0;
 
   var obj1 = new Issue();
@@ -39,7 +39,7 @@ var Issue = require('./models/issueModel.js')
     long: '85.7780823'
     // AMRI BBSR
   };
-  obj1.upvotes=Math.random in range(10, 50);
+  obj1.upvotes=Math.floor(Math.random() * 50) + 10;
   obj1.downvotes=0;
 
   var obj2 = new Issue();
@@ -50,7 +50,7 @@ var Issue = require('./models/issueModel.js')
     long: '85.8414062'
     // master canteen
   };
-  obj2.upvotes=Math.random in range(10, 50);
+  obj2.upvotes=Math.floor(Math.random() * 50) + 10;
   obj2.downvotes=0;
 
   var obj3 = new Issue();
@@ -61,7 +61,7 @@ var Issue = require('./models/issueModel.js')
     long: '85.780109'
     // khandagiri
   };
-  obj3.upvotes=Math.random in range(10, 50);
+  obj3.upvotes=Math.floor(Math.random() * 50) + 10;
   obj3.downvotes=0;
 
   var obj4 = new Issue();
@@ -71,7 +71,7 @@ var Issue = require('./models/issueModel.js')
     lat: '20.2816418',
     long: '85.8107226'
   };
-  obj4.upvotes=Math.random in range(10, 50);
+  obj4.upvotes=Math.floor(Math.random() * 50) + 10;
   obj4.downvotes=0;
 
   var obj5 = new Issue();
@@ -81,14 +81,17 @@ var Issue = require('./models/issueModel.js')
     lat: '20.2536236',
     long: '85.8183293'
   };
-  obj5.upvotes=Math.random in range(10, 50);
+  obj5.upvotes=Math.floor(Math.random() * 50) + 10;
   obj5.downvotes=0;
   console.log(obj);
-
-  obj.save(function(err){
-    if ( err ) throw err;
-    console.log("Object Saved Successfully");
-  });
+  var ar = [obj1,obj2,obj3,obj4,obj5];
+  for (i in ar){
+    ar[i].save(function(err){
+      if ( err ) throw err;
+      console.log("Object Saved Successfully");
+    });
+  }
+  
 
   console.log(obj);
 mongoose.connection.close();
