@@ -34,15 +34,9 @@
     text-decoration: inherit;
 		color: inherit;
 }
-		.vote{
-			padding-left: 8%;
-		}
-		.vote i {
-			cursor: pointer;
-		}
 		.upvoteCount {
 			margin: 0px;
-			margin-left: -20%;
+			margin-left: 10%;
 			text-align: center;
       font-size: 30px;
 		}
@@ -84,38 +78,48 @@
                         <div class="card">
                             <div class="header">
                               <div class="row">
-																<div class="col-md-1 vote">
-																	<div class="row upvote" onclick="upvote('<%=issue._id%>')">
-																		<i class="fa fa-chevron-up fa-2x" aria-hidden="true"></i>
-																	</div>
-																	<div class="row">
-																		<p class='upvoteCount'>
-																			<%=issue.upvotes%>
-																		</p>
-																	</div>
-																	<div class="row downvote" onclick="downvote('<%=issue._id%>')">
-																		<i class="fa fa-chevron-down fa-2x" aria-hidden="true"></i>
-																	</div>
-																</div>
+                                <div class="col-md-1 vote">
+                                  <div class="row">
+                                    <p class='upvoteCount'>
+                                      <%=issue.upvotes%> Votes
+                                    </p>
+                                  </div>
+                                </div>
                                 <div class="col-md-8">
                                   <a href="/polls/"><h4 class="title"><%=issue.name%></h4></a>
                                   <p class="category"><%=issue.description%></p>
                                 </div>
-											<% if(!issue.marked_for_consideration) {%>
-												<div class="col-md-2">
-													<h2 style="margin-top:30%;color:yellow;">Pending</h2>
-												</div>
-											<%} else {%>
-
-											<%}%>
                                 <div class="col-md-2">
-                                  <h2 style="margin-top:30%"><% if(issue.marked_for_consideration) {
-																	%>
-																	Reviewing
-																	<%}
-																	else{
-																	%>Pending<%
-																}%></h2>
+                                  <% if(issue.marked_for_consideration) {
+                                  %>
+                                  <h4 style="color:green">Under Review</h4>
+                                  <%}
+                                  else{
+                                  %>
+                                  <div class='btn btn-success' onclick="mark('<%=issue._id%>')">Mark for consideration</div>
+                                  <%
+                                }%>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id='<%=issue._id%>'>
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="content">
+                              <div class="row">
+                                <div class="col-md-8 col-md-offset-2">
+                                  <textarea id='msg' name="name" rows="8" cols='80'></textarea>
+                                </div>
+                              </div>
+                              <div class="row">
+                                <div class="col-md-2 col-md-offset-4">
+                                  <div class="btn btn-success" id='resolve-button'>Resolve</div>
+                                </div>
+                                <div class="col-md-2">
+                                  <div class="btn btn-danger" id='reject-button'>Reject</div>
                                 </div>
                               </div>
                             </div>
@@ -183,29 +187,29 @@
         (d.head || d.body).appendChild(s);
         })();
         </script>
+        <script type="text/javascript">
+          $(document).ready(function() {
+            $('#resolve-button').bind('click',function() {
+              var msg = $('#msg').val();
+              $.ajax({
+                method:'POST',
+                url : '/gov/resolve/'+'<%=issue._id%>',
+                success : function(data) {
+                  console.log(data);
+                }
+              })
+            });
+            $('#reject-button').bind('click',function() {
+              var msg = $('#msg').val();
+              $.ajax({
+                method:'POST',
+                url : '/gov/reject/'+'<%=issue._id%>',
+                success : function(data) {
+                  console.log(data);
+                }
+              })
+            });
+          })
+        </script>
 </body>
-<script type="text/javascript">
-	function upvote(id) {
-		$.ajax({
-			method : 'GET',
-			url : '/issues/upvote/'+id,
-			success : function(data) {
-				$('#'+id+' .upvoteCount').html(data.votes);
-				$('#'+id+' .upvote').attr('onclick',null);
-				$('#'+id+' .downvote').attr('onclick','downvote("'+id+'")');
-			}
-		});
-	}
-	function downvote(id) {
-		$.ajax({
-			method : 'GET',
-			url : '/issues/downvote/'+id,
-			success : function(data) {
-				$('#'+id+' .upvoteCount').html(data.votes);
-				$('#'+id+' .downvote').attr('onclick',null);
-				$('#'+id+' .upvote').attr('onclick','upvote("'+id+'")');
-			}
-		});
-	}
-</script>
 </html>
