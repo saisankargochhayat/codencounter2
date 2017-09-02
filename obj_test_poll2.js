@@ -74,9 +74,5 @@ for (var i =0;i<10;i++){
   });
 }
 
-obj.save(function(err){
-  if ( err ) throw err;
-  console.log("Object Saved Successfully");
-});
 console.log(obj.options[1].votes);
 mongoose.connection.close();
