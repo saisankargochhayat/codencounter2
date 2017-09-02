@@ -27,12 +27,15 @@ obj.description = "BMC has been allocated funds to construct an over-bridge to e
 obj.city = "Bhubaneswar";
 obj.upvotes = 110;
 obj.options = [{
-    name: "OUAT to Airport, Bhubaneswar",
+    name: "Jaydev Vihar to Nandankanan",
     votes: []
   },
   {
-    name: "Jayadev Vihar to Nandankanan",
-    votes: []
+    name: "OUAT to Airport, Bhubaneswar",
+    votes: [{
+      lat: "22.615",
+      long: "23.116"
+    }]
   }
 ];
 
@@ -61,7 +64,7 @@ for (var i =0;i<20;i++){
     lat: String(latitute),
     long: String(longitude)
   });
-
+}
 for (var i =0;i<10;i++){
   var latitute = (Math.random() * (20.298404 - 20.299727 + 1) + 20.299727).toFixed(6);
   var longitude = (Math.random() * (85.804939 - 85.817264 + 1) + 85.817264).toFixed(6);
@@ -71,36 +74,5 @@ for (var i =0;i<10;i++){
   });
 }
 
-for (var i =0;i<60;i++){
-  var latitute = (Math.random() * (20.263782 - 20.264849 + 1) + 20.264849).toFixed(6);
-  var longitude = (Math.random() * (85.814445 - 85.818136 + 1) + 85.818136).toFixed(6);
-  obj.options[0].votes.push({
-    lat: String(latitute),
-    long: String(longitude)
-  });
-}
-
-for (var i =0;i<30;i++){
-  var latitute = (Math.random() * (20.268311 - 20.265956 + 1) + 20.265956).toFixed(6);
-  var longitude = (Math.random() * (85.812922 - 85.816784 + 1) + 85.816784).toFixed(6);
-  obj.options[0].votes.push({
-    lat: String(latitute),
-    long: String(longitude)
-  });
-}
-
-for (var i =0;i<19;i++){
-  var latitute = (Math.random() * (20.265493 - 20.266315 + 1) + 20.266315).toFixed(6);
-  var longitude = (Math.random() * (85.803266 - 85.810604 + 1) + 85.810604).toFixed(6);
-  obj.options[0].votes.push({
-    lat: String(latitute),
-    long: String(longitude)
-  });
-}
-
-obj.save(function(err){
-  if ( err ) throw err;
-  console.log("Object Saved Successfully");
-});
 console.log(obj.options[1].votes);
 mongoose.connection.close();

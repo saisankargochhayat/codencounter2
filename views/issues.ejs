@@ -163,18 +163,28 @@
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="/assets/js/demo.js"></script>
 <script type="text/javascript">
-	function upvote(id) {
-		var value = parseInt($('#'+id+' .upvoteCount').html())+1;
-		$('#'+id+' .upvoteCount').html(value);
-		$('#'+id+' .upvote').attr('onclick',null);
-		$('#'+id+' .downvote').attr('onclick','downvote("'+id+'")');
-	}
-	function downvote(id) {
-		var value = parseInt($('#'+id+' .upvoteCount').html())-1;
-		$('#'+id+' .upvoteCount').html(value);
-		$('#'+id+' .downvote').attr('onclick',null);
-		$('#'+id+' .upvote').attr('onclick','upvote("'+id+'")');
-	}
+function upvote(id) {
+	$.ajax({
+		method : 'GET',
+		url : '/issues/upvote/'+id,
+		success : function(data) {
+			$('#'+id+' .upvoteCount').html(data.votes);
+			$('#'+id+' .upvote').attr('onclick',null);
+			$('#'+id+' .downvote').attr('onclick','downvote("'+id+'")');
+		}
+	});
+}
+function downvote(id) {
+	$.ajax({
+		method : 'GET',
+		url : '/issues/downvote/'+id,
+		success : function(data) {
+			$('#'+id+' .upvoteCount').html(data.votes);
+			$('#'+id+' .downvote').attr('onclick',null);
+			$('#'+id+' .upvote').attr('onclick','upvote("'+id+'")');
+		}
+	});
+}
 </script>
 </body>
 </html>
