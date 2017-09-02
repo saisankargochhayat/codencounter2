@@ -26,4 +26,35 @@ router.get('/getissue/:issueid', function (req, res, next) {
         });
     });
 });
+router.get('/upvote/:issueid', function (req, res, next) {
+    var query = {
+        _id: req.params.issueid
+    };
+    issueModel.findOne({
+        _id: req.params.issueid
+    }, function (err, doc) {
+        var currupvotes = doc.upvotes + 1
+        issueModel.update(query, {
+            upvotes: currupvotes
+        }, function (err, doc) {
+            res.send({votes:currupvotes});
+        })
+    });
+});
+router.get('/downvote/:issueid', function (req, res, next) {
+    var query = {
+        _id: req.params.issueid
+    };
+    issueModel.findOne({
+        _id: req.params.issueid
+    }, function (err, doc) {
+        var currupvotes = doc.upvotes -1
+        issueModel.update(query, {
+            upvotes: currupvotes
+        }, function (err, doc) {
+            res.send({votes:currupvotes});
+        })
+    });
+
+});
 module.exports = router;

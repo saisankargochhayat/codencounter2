@@ -179,17 +179,24 @@
 </body>
 <script type="text/javascript">
 	function upvote(id) {
-		var value = parseInt($('#'+id+' .upvoteCount').html())+1;
-		console.log($('#'+id+' .upvoteCount').html());
-		$('#'+id+' .upvoteCount').html(value);
-		$('#'+id+' .upvote').attr('onclick',null);
-		$('#'+id+' .downvote').attr('onclick','downvote("'+id+'")');
+		$.get({
+			url : '/issues/upvote/'+id,
+			success : function(data) {
+				$('#'+id+' .upvoteCount').html(data.votes);
+				$('#'+id+' .downvote').attr('onclick',null);
+				$('#'+id+' .upvote').attr('onclick','upvote("'+id+'")');
+			}
+		});
 	}
 	function downvote(id) {
-		var value = parseInt($('#'+id+' .upvoteCount').html())-1;
-		$('#'+id+' .upvoteCount').html(value);
-		$('#'+id+' .downvote').attr('onclick',null);
-		$('#'+id+' .upvote').attr('onclick','upvote("'+id+'")');
+		$.get({
+			url : '/issues/downvote/'+id,
+			success : function(data) {
+				$('#'+id+' .upvoteCount').html(data.votes);
+				$('#'+id+' .upvote').attr('onclick',null);
+				$('#'+id+' .downvote').attr('onclick','downvote("'+id+'")');
+			}
+		});
 	}
 </script>
 </html>
