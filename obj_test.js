@@ -23,11 +23,23 @@ var Poll = require('./models/pollModel.js')
   obj.item="applsadas";
   obj.description="Default";
   obj.upvotes=1;
-  obj.options=[];
-  
-  obj.save(function(err){
-    if ( err ) throw err;
-    console.log("Object Saved Successfully");
-  });
+  obj.options=[{
+    key:"bbsr",
+    name:"cet",
+    description:"dsfghasdfghas",
+    votes:[]
+  },
+  {
+    key:"dsfs",
+    name:"gfjhgvsdj",
+    description:"dsfghasdfghas",
+    votes:[]
+  }];
+console.log(obj);
+  // obj.save(function(err){
+  //   if ( err ) throw err;
+  //   console.log("Object Saved Successfully");
+  // });
+
   //console.log(obj);
 mongoose.connection.close();
