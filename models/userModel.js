@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
 
 var userSchema = new Schema({
     email: {
@@ -10,22 +11,35 @@ var userSchema = new Schema({
         type: String,
         required: true
     },
-    quantity: {
-        type: [Number],
-        required: true,
-        default: [1]
+    aadhar: {
+        type: Number,
+        required: true
     },
-    unit: {
+    id_upload: {
+        type: String
+        // required: true
+    },
+    city: {
         type: String,
         required: true
     },
-    categories: [String],
-    calculationMethod: String,
-    components: [{
-        name: String,
-        quantity: [Number],
-        unit: String
-    }]
+    resident_location: {
+        lat: String,
+        long: String
+    },
+    issuesCreated: {
+        type: [ObjectId],
+        required: true,
+        default: []
+    },
+    pollsParticipated: {
+        type: [ObjectId],
+        required: true,
+        default: []
+    }
+}, {
+    collection: 'issues',
+    timestamps: true
 })
 
 module.exports = mongoose.model('User', userSchema);
