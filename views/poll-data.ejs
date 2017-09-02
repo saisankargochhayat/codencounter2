@@ -75,9 +75,41 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-											<div id = 'map'>
+											<div class="card">
+												<div class="header">
+													<h3>Construction of an over-bridge</h3>
+													<p>
+														The city has funds for the construction of an over-bridge in Bhubaneswar. The government wants
+														to know the most beneficial use of the fund with highest impact factor.
+													</p>
+
+												</div>
+												<div class="content">
+													<div class="row">
+														<div class="col-md-9">
+															<div id = 'map'>
+
+															</div>
+														</div>
+														<div class="col-md-3">
+															<h4>Legend</h4>
+															<ol>
+																<li style="color:red">
+																	over-bridge at Jayadev Vihar
+																</li>
+																<li style="color:blue">
+																	over-bridge at OUAT
+																</li>
+															</ol>
+
+														</div>
+													</div>
+
+
+												</div>
 
 											</div>
+
                     </div>
                 </div>
             </div>
@@ -90,7 +122,7 @@
 
 <style media="screen">
 #map {
-height: 400px;
+height: 300px;
 }
 </style>
 
@@ -143,7 +175,7 @@ function createLayer(points,gradient) {
 $(document).ready(function() {
 	$.ajax({
 		method : 'GET',
-		url : '/polls/api/'+'59ab05ac363a5e114a30820d',
+		url : '/polls/api/'+'59ab288978387212d72a3ec2',
 		success : function(data) {
 			var poll = data.poll;
 			var option1 = poll.options[0].votes;
@@ -153,17 +185,7 @@ $(document).ready(function() {
           'rgba(0, 255, 255, 0)',
           'rgba(0, 255, 255, 1)',
           'rgba(0, 191, 255, 1)',
-          'rgba(0, 127, 255, 1)',
-          'rgba(0, 63, 255, 1)',
-          'rgba(0, 0, 255, 1)',
-          'rgba(0, 0, 223, 1)',
-          'rgba(0, 0, 191, 1)',
-          'rgba(0, 0, 159, 1)',
-          'rgba(0, 0, 127, 1)',
-          'rgba(63, 0, 91, 1)',
-          'rgba(127, 0, 63, 1)',
-          'rgba(191, 0, 31, 1)',
-          'rgba(255, 0, 0, 1)'
+          'rgba(0, 127, 255, 1)'
         ];
 
 
@@ -172,12 +194,12 @@ $(document).ready(function() {
 				points.push(new google.maps.LatLng(parseFloat(option2[i].lat),parseFloat(option2[i].long)));
 			}
 			initMap();
-			createLayer(points,gradient1);
+			createLayer(points,null);
 			points = [];
 			for(var i = 0; i < option1.length; i++) {
 				points.push(new google.maps.LatLng(parseFloat(option1[i].lat),parseFloat(option1[i].long)));
 			}
-			createLayer(points,gradient2);
+			createLayer(points,gradient1);
 		}
 	})
 })

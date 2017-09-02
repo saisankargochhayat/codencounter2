@@ -114,14 +114,19 @@
 																		</div>
 																	</a>
 																	<div class="col-md-2">
-																		<h4 style="margin-top:10%;">
-																			<% if(issue.marked_for_consideration) {
-																			%>
-																			Reviewing
-																			<%}
-																			else{
-																			%>Pending<%
-																		}%></h4>
+														<% if(!issue.marked_for_consideration) {%>
+															<h4 style="margin-top:10%;color:yellow">Pending</h4>
+														<%}else{
+															if(issue.resolved.mesadge == 'false') {%>
+																<h4 style="margin-top:10%;color:blue">Under Review</h4>
+															<%} else {
+																if(issue.resolved.success) {%>
+																	<h4 style="margin-top:10%;color:green">Accepted</h4>
+																<%}else{%>
+																	<h4 style="margin-top:10%;color:red">Rejected</h4>
+																<%}
+															}
+														}%>
 																	</div>
                                 </div>
 																<%}%>

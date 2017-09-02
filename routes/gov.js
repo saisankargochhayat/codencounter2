@@ -47,10 +47,11 @@ router.post('/resolve/:issueid', function (req, res, next) {
     issueModel.findOne({
         _id: req.params.issueid
     }, function (err, doc) {
+      console.log(req.body.msg);
         issueModel.update(query, {
             resolved: {
               success: true,
-              msg: req.body.msg
+              mesasge: req.body.msg
             }
         }, function (err, doc) {
             res.send(doc);
