@@ -16,6 +16,7 @@ router.get('/signup',function(req,res,next) {
 });
 
 router.post('/signup',function(req,res,next) {
+  // res.redirect('/users/signin.html')
   var user = new userModel({
     email : req.body.email,
     password : req.body.password,
