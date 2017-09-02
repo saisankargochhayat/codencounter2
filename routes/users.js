@@ -3,7 +3,7 @@ var router = express.Router();
 var UserModel = require('../models/userModel');
 var helpers = require('../helpers');
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', helpers.is_authenticated,function(req, res, next) {
   res.send('TODO');
 });
 
@@ -16,24 +16,23 @@ router.get('/signup',function(req,res,next) {
 });
 
 router.post('/signup',function(req,res,next) {
-  // res.redirect('/users/signin.html')
   console.log(req.body);
   var user = new UserModel({
     email : req.body.email,
     password : req.body.password,
     aadhar : req.body.aadhar,
     city : req.body.residence_city,
-    residence_lat : req.body.residence_lat,
-    residence_lon : req.body.residence_lon
+    resident_location : {
+      lat : req.body.residence_lat,
+      long : req.body.residence_lon
+    }
   });
   user.save(function(err,newUser) {
     if(err) {
       console.log(err);
       res.send(err);
     }else {
-      console.log(newUser);
       req.session.user = newUser;
-      console.log(req.session);
       res.send("successfully signed up");
     }
   });

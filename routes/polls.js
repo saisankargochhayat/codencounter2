@@ -4,6 +4,9 @@ var UserModel = require('../models/userModel');
 var helpers = require('../helpers');
 
 router.get('/',helpers.is_authenticated,function(req,res,next) {
-  User
-})
+
+});
+
+router.post('/create',helpers.is_authenticated,function(req,res,next) {
+});
 module.exports = router;
