@@ -12,6 +12,23 @@ var app = express();
 
 // database setup
 var mongoose = require('mongoose');
+// connect to the database
+mongoose.connect(`mongodb://localhost/winterfell`);
+
+// When successfully connected
+mongoose.connection.on('connected', () => {
+  console.log('Connection to database established successfully');
+});
+
+// If the connection throws an error
+mongoose.connection.on('error', (err) => {
+  console.log('Error connecting to database: ' + err);
+});
+
+// When the connection is disconnected
+mongoose.connection.on('disconnected', () => {
+  console.log('Database disconnected');
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
