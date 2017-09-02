@@ -18,7 +18,6 @@ var pollSchema = new Schema({
     upvotes: Number,
     options: [{
         name: String,
-        description: String,
         votes: [{
             lat: String,
             long: String
