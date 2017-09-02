@@ -1,5 +1,7 @@
 // database setup
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema,
+ObjectId = Schema.ObjectId;
 // connect to the database
 mongoose.connect(`mongodb://localhost/winterfell`);
 
@@ -20,7 +22,7 @@ mongoose.connection.on('disconnected', () => {
 
 var Poll = require('./models/pollModel.js')
   var obj = new Poll();
-  obj.item="applsadas";
+  obj.name="nua element1212sdkjsak";
   obj.description="Default";
   obj.upvotes=1;
   obj.options=[{
@@ -36,10 +38,10 @@ var Poll = require('./models/pollModel.js')
     votes:[]
   }];
 console.log(obj);
-  // obj.save(function(err){
-  //   if ( err ) throw err;
-  //   console.log("Object Saved Successfully");
-  // });
+  obj.save(function(err){
+    if ( err ) throw err;
+    console.log("Object Saved Successfully");
+  });
 
-  //console.log(obj);
+  console.log(obj);
 mongoose.connection.close();

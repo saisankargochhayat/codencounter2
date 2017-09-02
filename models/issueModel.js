@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
+    ObjectId = Schema.Types.ObjectId;
 
 var issueSchema = new Schema({
     name: {
@@ -16,14 +16,14 @@ var issueSchema = new Schema({
         long: String
     },
     upvotes: {
-        type: [ObjectId],
+        type: Number,
         required: true,
-        default: []
+        default: 0
     },
     downvotes: {
-        type: [ObjectId],
+        type: Number,
         required: true,
-        default: []
+        default: 0
     },
     marked_for_consideration: {
         type: Boolean,
