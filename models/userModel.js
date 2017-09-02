@@ -36,7 +36,7 @@ var userSchema = new Schema({
         default: []
     }
 }, {
-    collection: 'issues',
+    collection: 'users',
     timestamps: true
 })
 
