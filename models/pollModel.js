@@ -17,7 +17,6 @@ var pollSchema = new Schema({
     },
     upvotes: Number,
     options: [{
-        key: String,
         name: String,
         description: String,
         votes: [{
