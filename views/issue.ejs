@@ -101,27 +101,41 @@
                                   <a href="/polls/"><h4 class="title"><%=issue.name%></h4></a>
                                   <p class="category"><%=issue.description%></p>
                                 </div>
-											<% if(!issue.marked_for_consideration) {%>
-												<div class="col-md-2">
-													<h2 style="margin-top:30%;color:yellow;">Pending</h2>
-												</div>
-											<%} else {%>
-
-											<%}%>
-                                <div class="col-md-2">
-                                  <h2 style="margin-top:30%"><% if(issue.marked_for_consideration) {
-																	%>
-																	Reviewing
-																	<%}
-																	else{
-																	%>Pending<%
-																}%></h2>
-                                </div>
+																<div class="col-md-2">
+													<% if(!issue.marked_for_consideration) {%>
+														<h4 style="margin-top:10%;color:yellow">Pending</h4>
+													<%}else{
+														if(issue.resolved.mesasge == 'false') {%>
+															<h4 style="margin-top:10%;color:blue">Under Review</h4>
+														<%} else {
+															if(issue.resolved.success) {%>
+																<h4 style="margin-top:10%;color:green">Accepted</h4>
+															<%}else{%>
+																<h4 style="margin-top:10%;color:red">Rejected</h4>
+															<%}
+														}
+													}%>
+																</div>
                               </div>
                             </div>
                         </div>
                     </div>
                 </div>
+								<% if(issue.marked_for_consideration && issue.resolved.mesasge != 'false') {%>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="card">
+												<div class="content">
+													<div class="row">
+														<div class="col-md-12">
+															<h4><%=issue.resolved.mesasge%></h4>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<%}%>
                 <div class="row">
                   <div class="col-md-12">
                     <div class="card">

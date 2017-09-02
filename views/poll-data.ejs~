@@ -5,7 +5,7 @@
 	<link rel="icon" type="image/png" href="/assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Polls</title>
+	<title>Data Visualization</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -34,19 +34,11 @@
     text-decoration: inherit;
 		color: inherit;
 }
-		.vote{
-			padding-left: 8%;
-		}
-		.vote i {
-			cursor: pointer;
-		}
 		.upvoteCount {
 			margin: 0px;
-			margin-left: -40%;
+			margin-left: 10%;
 			text-align: center;
-		}
-		.issuerow{
-			margin-top: 2%;
+      font-size: 30px;
 		}
 	</style>
 </head>
@@ -64,7 +56,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/dashboard">Polls</a>
+                    <a class="navbar-brand" href="/dashboard">Data Visualization</a>
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -83,43 +75,9 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card">
-                            <div class="header">
-                                <a href="/polls/"><h4 class="title">Polls</h4></a>
-                                <p class="category">Latest</p>
-                            </div>
-                            <div class="content">
-															<%
-															for(var i = 0; i < polls.length; i++) {
-																var poll = polls[i];
-															%>
-                                <div class="row issuerow" id='<%=poll._id%>'>
-																	<div class="col-md-1 vote">
-																		<div class="row upvote" onclick="upvote('<%=poll._id%>')">
-																			<i class="fa fa-chevron-up" aria-hidden="true"></i>
-																		</div>
-																		<div class="row">
-																			<p class='upvoteCount'>
-																				<%=poll.upvotes%>
-																			</p>
-																		</div>
-																		<div class="row downvote" onclick="downvote('<%=poll._id%>')">
-																			<i class="fa fa-chevron-down" aria-hidden="true"></i>
-																		</div>
-																	</div>
-																	<a href="/polls/getissue/<%=poll._id%>">
-																		<div class="col-md-8" style="cursor:pointer">
-																			<h4 style="margin-top:0px"><%=poll.name%></h4>
-																			<h6 style="font-weight:500"><%=poll.description%></h5>
-																		</div>
-																	</a>
-																	<div class="col-md-2">
+											<div id = 'map'>
 
-																	</div>
-                                </div>
-																<%}%>
-                            </div>
-                        </div>
+											</div>
                     </div>
                 </div>
             </div>
@@ -130,7 +88,11 @@
     </div>
 </div>
 
-
+<style media="screen">
+#map {
+height: 400px;
+}
+</style>
 
 
     <!--   Core JS Files   -->
@@ -148,36 +110,78 @@
     <script src="/assets/js/bootstrap-notify.js"></script>
 
     <!--  Google Maps Plugin    -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
 
     <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
 	<script src="/assets/js/light-bootstrap-dashboard.js"></script>
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="/assets/js/demo.js"></script>
+	<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbgO9-sijgbursnDQFH1LqQcQ4iw9TFv4&libraries=visualization">
+	</script>
 <script type="text/javascript">
-// function upvote(id) {
-// 	$.ajax({
-// 		method : 'GET',
-// 		url : '/issues/upvote/'+id,
-// 		success : function(data) {
-// 			$('#'+id+' .upvoteCount').html(data.votes);
-// 			$('#'+id+' .upvote').attr('onclick',null);
-// 			$('#'+id+' .downvote').attr('onclick','downvote("'+id+'")');
-// 		}
-// 	});
-// }
-// function downvote(id) {
-// 	$.ajax({
-// 		method : 'GET',
-// 		url : '/issues/downvote/'+id,
-// 		success : function(data) {
-// 			$('#'+id+' .upvoteCount').html(data.votes);
-// 			$('#'+id+' .downvote').attr('onclick',null);
-// 			$('#'+id+' .upvote').attr('onclick','upvote("'+id+'")');
-// 		}
-// 	});
-// }
+var map;
+
+
+function initMap() {
+	map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 20.296059, lng: 85.82454},
+          zoom: 12
+        });
+
+}
+
+function createLayer(points,gradient) {
+	var heatmap = new google.maps.visualization.HeatmapLayer({
+    data: points,
+    map: map
+  });
+	heatmap.set('gradient',gradient);
+}
+
+$(document).ready(function() {
+	$.ajax({
+		method : 'GET',
+		url : '/polls/api/'+'59ab05ac363a5e114a30820d',
+		success : function(data) {
+			var poll = data.poll;
+			var option1 = poll.options[0].votes;
+			var option2 = poll.options[1].votes;
+
+			var gradient1 = [
+          'rgba(0, 255, 255, 0)',
+          'rgba(0, 255, 255, 1)',
+          'rgba(0, 191, 255, 1)',
+          'rgba(0, 127, 255, 1)',
+          'rgba(0, 63, 255, 1)',
+          'rgba(0, 0, 255, 1)',
+          'rgba(0, 0, 223, 1)',
+          'rgba(0, 0, 191, 1)',
+          'rgba(0, 0, 159, 1)',
+          'rgba(0, 0, 127, 1)',
+          'rgba(63, 0, 91, 1)',
+          'rgba(127, 0, 63, 1)',
+          'rgba(191, 0, 31, 1)',
+          'rgba(255, 0, 0, 1)'
+        ]
+
+
+			var points = [];
+			for(var i = 0; i < option2.length; i++) {
+				points.push(new google.maps.LatLng(parseFloat(option2[i].lat),parseFloat(option2[i].long)));
+			}
+			initMap();
+			createLayer(points,gradient1);
+			points = [];
+			for(var i = 0; i < option1.length; i++) {
+				points.push(new google.maps.LatLng(parseFloat(option1[i].lat),parseFloat(option1[i].long)));
+			}
+			createLayer(points,gradient2);
+		}
+	})
+})
 </script>
+
 </body>
 </html>
