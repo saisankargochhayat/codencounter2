@@ -22,19 +22,16 @@ mongoose.connection.on('disconnected', () => {
 
 var Poll = require('./models/pollModel.js')
   var obj = new Poll();
-  obj.name="nua element1212sdkjsak";
-  obj.description="Default";
-  obj.upvotes=1;
+  obj.name="Construction of over-bridge";
+  obj.description="BMC has been allocated funds to construct an over-bridge to ease traffic in the city";
+  obj.city="Bhubaneswar";
+  obj.upvotes=29;
   obj.options=[{
-    key:"bbsr",
-    name:"cet",
-    description:"dsfghasdfghas",
+    name:"Acharya Vihar to Nandankanan",
     votes:[]
   },
   {
-    key:"dsfs",
-    name:"gfjhgvsdj",
-    description:"dsfghasdfghas",
+    name:"OUAT to Airport, Bhubaneswar",
     votes:[]
   }];
 console.log(obj);
