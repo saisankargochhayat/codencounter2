@@ -22,57 +22,30 @@ mongoose.connection.on('disconnected', () => {
 
 var Poll = require('./models/pollModel.js')
 var obj = new Poll();
-obj.name = "Construction of over-bridge";
-obj.description = "BMC has been allocated funds to construct an over-bridge to ease traffic in the city";
+obj.name = "Banning Triple Talaq";
+obj.description = "Triple Talaq, also known as talaq-e-biddat, instant divorce and talaq-e-mughallazah (irrevocable divorce), is a form of Islamic divorce which has been used by Muslims in India. It allows any Muslim man to legally divorce his wife by stating the word talaq (the Arabic word for divorce) three times in oral, written, or more recently electronic form.The use and status of triple talaq in India has been a subject of controversy and debate. Those questioning the practice have raised issues of justice, gender equality, human rights and secularism.";
 obj.city = "Bhubaneswar";
 obj.upvotes = 110;
 obj.options = [{
-    name: "Jaydev Vihar to Nandankanan",
+    name: "Triple Talaq Should be Banned",
     votes: []
   },
   {
-    name: "OUAT to Airport, Bhubaneswar",
-    votes: [{
-      lat: "22.615",
-      long: "23.116"
-    }]
+    name: "Triple Talaq should prevail",
+    votes: []
   }
 ];
 
 for (var i =0;i<50;i++){
-  var latitute = (Math.random() * (20.295506 - 20.283511 + 1) + 20.283511).toFixed(6);
-  var longitude = (Math.random() * (85.842791 - 85.856266 + 1) + 85.856266).toFixed(6);
-  obj.options[1].votes.push({
-    lat: String(latitute),
-    long: String(longitude)
+  var age = Math.floor(Math.random() * (30 - 20 + 1) + 20).toFixed(0);
+  var sex = "Female"
+  obj.options[0].votes.push({
+    lat: String(age),
+    long: String(sex)
   });
 }
 
-for (var i =0;i<30;i++){
-  var latitute = (Math.random() * (20.295023 - 20.286409 + 1) + 20.286409).toFixed(6);
-  var longitude = (Math.random() * (85.825024 - 85.834379 + 1) + 85.834379).toFixed(6);
-  obj.options[1].votes.push({
-    lat: String(latitute),
-    long: String(longitude)
-  });
-}
 
-for (var i =0;i<20;i++){
-  var latitute = (Math.random() * (20.313537 - 20.302429 + 1) + 20.302429).toFixed(6);
-  var longitude = (Math.random() * (85.845280 - 85.827684 + 1) + 85.827684).toFixed(6);
-  obj.options[1].votes.push({
-    lat: String(latitute),
-    long: String(longitude)
-  });
-}
-for (var i =0;i<10;i++){
-  var latitute = (Math.random() * (20.298404 - 20.299727 + 1) + 20.299727).toFixed(6);
-  var longitude = (Math.random() * (85.804939 - 85.817264 + 1) + 85.817264).toFixed(6);
-  obj.options[1].votes.push({
-    lat: String(latitute),
-    long: String(longitude)
-  });
-}
 
-console.log(obj.options[1].votes);
+console.log(obj.options[0].votes);
 mongoose.connection.close();
