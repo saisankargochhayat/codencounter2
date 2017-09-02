@@ -27,7 +27,7 @@ var pollSchema = new Schema({
             type: Boolean,
             default: false
         },
-        mesasge: {
+        message: {
             type: String,
             default: false
         } 
