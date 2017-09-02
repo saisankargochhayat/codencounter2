@@ -14,10 +14,7 @@ var issues = require('./routes/issues');
 var app = express();
 //Use session
 app.use(session({
-  secret: 'thenorthremembers',
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: true }
+  secret: 'thenorthremembers'
 }));
 
 // database setup
