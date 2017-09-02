@@ -14,8 +14,9 @@ router.get('/signup',function(req,res,next) {
   res.redirect('/signup.html');
 });
 
-router.post('/signup',funcion(req,res,next) {
-
+router.post('/signup',function(req,res,next) {
+  // res.redirect('/users/signin.html')
+  console.log('');
 });
 
 module.exports = router;
