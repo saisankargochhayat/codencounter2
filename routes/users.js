@@ -17,13 +17,14 @@ router.get('/signup',function(req,res,next) {
 
 router.post('/signup',function(req,res,next) {
   // res.redirect('/users/signin.html')
-  var user = new userModel({
+  console.log(req.body);
+  var user = new UserModel({
     email : req.body.email,
     password : req.body.password,
     aadhar : req.body.aadhar,
-    city : req.body.city,
-    residence_lat : residence_lat,
-    residence_lon : residence_lon
+    city : req.body.residence_city,
+    residence_lat : req.body.residence_lat,
+    residence_lon : req.body.residence_lon
   });
   user.save(function(err,newUser) {
     if(err) {
@@ -33,12 +34,13 @@ router.post('/signup',function(req,res,next) {
       console.log(newUser);
       req.session.user = newUser;
       console.log(req.session);
+      res.send("successfully signed up");
     }
   });
 });
 
 router.post('/signin',function(req,res,next) {
-  userModel.findOne({email : req.body.email , password : req.body.password},function(err,user) {
+  UserModel.findOne({email : req.body.email , password : req.body.password},function(err,user) {
     if(err){
       console.log(err);
       res.send(err)

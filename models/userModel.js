@@ -29,12 +29,10 @@ var userSchema = new Schema({
     },
     issuesCreated: {
         type: [ObjectId],
-        required: true,
         default: []
     },
     pollsParticipated: {
         type: [ObjectId],
-        required: true,
         default: []
     }
 }, {
