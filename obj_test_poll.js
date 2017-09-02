@@ -36,6 +36,51 @@ obj.options = [{
   }
 ];
 
+var obj = new Poll();
+obj.name = "Construction of over-bridge";
+obj.description = "BMC has been allocated funds to construct an over-bridge to ease traffic in the city";
+obj.city = "Bhubaneswar";
+obj.upvotes = 110;
+obj.options = [{
+    name: "OUAT to Airport, Bhubaneswar",
+    votes: []
+  },
+  {
+    name: "Jayadev Vihar to Nandankanan",
+    votes: []
+  }
+];
+
+var obj = new Poll();
+obj.name = "Install WiFi routers";
+obj.description = "Install WiFi routers for free internet accessibility";
+obj.city = "Bhubaneswar";
+obj.upvotes = 67;
+obj.options = [{
+    name: "Nandankanan Road, Bhubaneswar",
+    votes: []
+  },
+  {
+    name: "Master Canteen Road",
+    votes: []
+  }
+];
+
+var obj = new Poll();
+obj.name = "Construction of Cycle-Track";
+obj.description = "Constructing Cycle-track in the city for safety of school students";
+obj.city = "Bhubaneswar";
+obj.upvotes = 56;
+obj.options = [{
+    name: "Unit - 8, Bhubaneswar",
+    votes: []
+  },
+  {
+    name: "Fire Station, Bhubaneswar",
+    votes: []
+  }
+];
+
 for (var i =0;i<50;i++){
   var latitute = (Math.random() * (20.295506 - 20.283511) + 20.283511).toFixed(6);
   var longitude = (Math.random() * (85.842791 - 85.856266) + 85.856266).toFixed(6);
@@ -51,8 +96,8 @@ for (var i =0;i<30;i++){
   obj.options[1].votes.push({
     lat: String(latitute),
     long: String(longitude)
+  }
   });
-}
 
 for (var i =0;i<20;i++){
   var latitute = (Math.random() * (20.313537 - 20.302429) + 20.302429).toFixed(6);
