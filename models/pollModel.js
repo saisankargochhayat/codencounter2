@@ -20,7 +20,10 @@ var pollSchema = new Schema({
         key: String,
         name: String,
         description: String,
-        votes:[ObjectId]
+        votes: [{
+            lat: String,
+            long: String
+        }]
     }],
     resolved: {
         success: {
@@ -30,7 +33,7 @@ var pollSchema = new Schema({
         message: {
             type: String,
             default: false
-        } 
+        }
     }
 }, {
     collection: 'polls',
