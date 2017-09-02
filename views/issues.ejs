@@ -40,10 +40,13 @@
 		.vote i {
 			cursor: pointer;
 		}
-		.upvotes {
+		.upvoteCount {
 			margin: 0px;
-			margin-left: -50%;
+			margin-left: -40%;
 			text-align: center;
+		}
+		.issuerow{
+			margin-top: 2%;
 		}
 	</style>
 </head>
@@ -86,30 +89,42 @@
                                 <p class="category">Latest</p>
                             </div>
                             <div class="content">
-                                <div class="row">
+															<%
+															for(var i = 0; i < issues.length; i++) {
+																var issue = issues[i];
+															%>
+                                <div class="row issuerow" id='<%=issue._id%>'>
 																	<div class="col-md-1 vote">
-																		<div class="row" onclick="upvote()">
+																		<div class="row upvote" onclick="upvote('<%=issue._id%>')">
 																			<i class="fa fa-chevron-up" aria-hidden="true"></i>
 																		</div>
 																		<div class="row">
-																			<p class='upvotes'>
-																				10
+																			<p class='upvoteCount'>
+																				<%=issue.upvotes%>
 																			</p>
 																		</div>
-																		<div class="row" onclick="downvote()">
+																		<div class="row downvote" onclick="downvote('<%=issue._id%>')">
 																			<i class="fa fa-chevron-down" aria-hidden="true"></i>
 																		</div>
 																	</div>
-																	<a href="/issues/someissue">
+																	<a href="/issues/getissue/<%=issue._id%>">
 																		<div class="col-md-8" style="cursor:pointer">
-																			<h4 style="margin-top:0px">Issue Name</h4>
-																			<h6 style="font-weight:500">Issue Description</h5>
+																			<h4 style="margin-top:0px"><%=issue.name%></h4>
+																			<h6 style="font-weight:500"><%=issue.description%></h5>
 																		</div>
 																	</a>
 																	<div class="col-md-2">
-																		<h4 style="margin-top:10%;">Reviewing</h4>
+																		<h4 style="margin-top:10%;">
+																			<% if(issue.marked_for_consideration) {
+																			%>
+																			Reviewing
+																			<%}
+																			else{
+																			%>Pending<%
+																		}%></h4>
 																	</div>
                                 </div>
+																<%}%>
                             </div>
                         </div>
                     </div>
@@ -147,6 +162,19 @@
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="/assets/js/demo.js"></script>
-
+<script type="text/javascript">
+	function upvote(id) {
+		var value = parseInt($('#'+id+' .upvoteCount').html())+1;
+		$('#'+id+' .upvoteCount').html(value);
+		$('#'+id+' .upvote').attr('onclick',null);
+		$('#'+id+' .downvote').attr('onclick','downvote("'+id+'")');
+	}
+	function downvote(id) {
+		var value = parseInt($('#'+id+' .upvoteCount').html())-1;
+		$('#'+id+' .upvoteCount').html(value);
+		$('#'+id+' .downvote').attr('onclick',null);
+		$('#'+id+' .upvote').attr('onclick','upvote("'+id+'")');
+	}
+</script>
 </body>
 </html>

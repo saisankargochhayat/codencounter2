@@ -40,9 +40,9 @@
 		.vote i {
 			cursor: pointer;
 		}
-		.upvotes {
+		.upvoteCount {
 			margin: 0px;
-			margin-left: -30%;
+			margin-left: -20%;
 			text-align: center;
       font-size: 30px;
 		}
@@ -79,30 +79,36 @@
 
         <div class="content">
             <div class="container-fluid">
-                <div class="row">
+                <div class="row" id='<%=issue._id%>'>
                     <div class="col-md-12">
                         <div class="card">
                             <div class="header">
                               <div class="row">
-                                <div class="col-md-1 vote">
-                                  <div class="row" onclick="upvote()">
-                                    <i class="fa fa-chevron-up fa-2x" aria-hidden="true"></i>
-                                  </div>
-                                  <div class="row">
-                                    <p class='upvotes'>
-                                      10
-                                    </p>
-                                  </div>
-                                  <div class="row" onclick="downvote()">
-                                    <i class="fa fa-chevron-down fa-2x" aria-hidden="true"></i>
-                                  </div>
-                                </div>
+																<div class="col-md-1 vote">
+																	<div class="row upvote" onclick="upvote('<%=issue._id%>')">
+																		<i class="fa fa-chevron-up fa-2x" aria-hidden="true"></i>
+																	</div>
+																	<div class="row">
+																		<p class='upvoteCount'>
+																			<%=issue.upvotes%>
+																		</p>
+																	</div>
+																	<div class="row downvote" onclick="downvote('<%=issue._id%>')">
+																		<i class="fa fa-chevron-down fa-2x" aria-hidden="true"></i>
+																	</div>
+																</div>
                                 <div class="col-md-8">
-                                  <a href="/polls/"><h4 class="title">Some Big Issue</h4></a>
-                                  <p class="category">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                  <a href="/polls/"><h4 class="title"><%=issue.name%></h4></a>
+                                  <p class="category"><%=issue.description%></p>
                                 </div>
                                 <div class="col-md-2">
-                                  <h2 style="margin-top:30%">Reviewing</h2>
+                                  <h2 style="margin-top:30%"><% if(issue.marked_for_consideration) {
+																	%>
+																	Reviewing
+																	<%}
+																	else{
+																	%>Pending<%
+																}%></h2>
                                 </div>
                               </div>
                             </div>
@@ -171,4 +177,26 @@
         })();
         </script>
 </body>
+<script type="text/javascript">
+	function upvote(id) {
+		$.get({
+			url : '/issues/upvote/'+id,
+			success : function(data) {
+				$('#'+id+' .upvoteCount').html(data.votes);
+				$('#'+id+' .downvote').attr('onclick',null);
+				$('#'+id+' .upvote').attr('onclick','upvote("'+id+'")');
+			}
+		});
+	}
+	function downvote(id) {
+		$.get({
+			url : '/issues/downvote/'+id,
+			success : function(data) {
+				$('#'+id+' .upvoteCount').html(data.votes);
+				$('#'+id+' .upvote').attr('onclick',null);
+				$('#'+id+' .downvote').attr('onclick','downvote("'+id+'")');
+			}
+		});
+	}
+</script>
 </html>
