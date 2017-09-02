@@ -22,22 +22,22 @@ mongoose.connection.on('disconnected', () => {
 
 var Poll = require('./models/pollModel.js')
 var obj = new Poll();
-obj.name = "Banning Triple Talaq";
-obj.description = "Triple Talaq, also known as talaq-e-biddat, instant divorce and talaq-e-mughallazah (irrevocable divorce), is a form of Islamic divorce which has been used by Muslims in India. It allows any Muslim man to legally divorce his wife by stating the word talaq (the Arabic word for divorce) three times in oral, written, or more recently electronic form.The use and status of triple talaq in India has been a subject of controversy and debate. Those questioning the practice have raised issues of justice, gender equality, human rights and secularism.";
+obj.name = "Legalising Gay rights";
+obj.description = "legal recognition to marriage for same-sex couples";
 obj.city = "Bhubaneswar";
 obj.upvotes = 110;
 obj.options = [{
-    name: "Triple Talaq Should be Banned",
+    name: "Gay rights shouldn't be legalised",
     votes: []
   },
   {
-    name: "Triple Talaq should prevail",
+    name: "Gay rights should be legalised",
     votes: []
   }
 ];
 
-for (var i =0;i<50;i++){
-  var age = Math.floor(Math.random() * (30 - 20 + 1) + 20).toFixed(0);
+for (var i =0;i<70;i++){
+  var age = Math.floor(Math.random() * (40 - 20 + 1) + 20);
   var sex = "Female"
   obj.options[0].votes.push({
     lat: String(age),
@@ -45,7 +45,68 @@ for (var i =0;i<50;i++){
   });
 }
 
+for (var i =0;i<65;i++){
+  var age = Math.floor(Math.random() * (40 - 20 + 1) + 20);
+  var sex = "Male"
+  obj.options[0].votes.push({
+    lat: String(age),
+    long: String(sex)
+  });
+}
 
+for (var i =0;i<20;i++){
+  var age = Math.floor(Math.random() * (70 - 40 + 1) + 40);
+  var sex = "Female"
+  obj.options[0].votes.push({
+    lat: String(age),
+    long: String(sex)
+  });
+}
+
+for (var i =0;i<20;i++){
+  var age = Math.floor(Math.random() * (70 - 40 + 1) + 40);
+  var sex = "Male"
+  obj.options[1].votes.push({
+    lat: String(age),
+    long: String(sex)
+  });
+}
+
+for (var i =0;i<15;i++){
+  var age = Math.floor(Math.random() * (40 - 20 + 1) + 20);
+  var sex = "Female"
+  obj.options[1].votes.push({
+    lat: String(age),
+    long: String(sex)
+  });
+}
+
+for (var i =0;i<18;i++){
+  var age = Math.floor(Math.random() * (40 - 20 + 1) + 20);
+  var sex = "Male"
+  obj.options[1].votes.push({
+    lat: String(age),
+    long: String(sex)
+  });
+}
+
+for (var i =0;i<50;i++){
+  var age = Math.floor(Math.random() * (70 - 40 + 1) + 40);
+  var sex = "Female"
+  obj.options[1].votes.push({
+    lat: String(age),
+    long: String(sex)
+  });
+}
+
+for (var i =0;i<55;i++){
+  var age = Math.floor(Math.random() * (70 - 40 + 1) + 40);
+  var sex = "Male"
+  obj.options[1].votes.push({
+    lat: String(age),
+    long: String(sex)
+  });
+}
 
 console.log(obj.options[0].votes);
 mongoose.connection.close();
