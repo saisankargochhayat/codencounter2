@@ -10,31 +10,27 @@ router.get('/', function (req, res, next) {
       upvotes: -1
   }).exec(function (err, issues) {
       for (i in issues) {
-          console.log(i)
           getIssues.push(issues[i]);
       }
       res.send(getIssues);
   });
 });
-router.get('/', function (req, res, next) {
-  var getIssues = []
-  pollModel.find().sort({
-      upvotes: -1
-  }).exec(function (err, issues) {
-      for (i in issues) {
-          console.log(i)
-          getIssues.push(issues[i]);
-      }
-      res.send(getIssues);
+
+router.get('/api/:pollid', function (req, res, next) {
+  pollModel.findOne({
+      _id: req.params.pollid
+  }).exec(function (err, poll) {
+      res.send({poll:poll})
   });
 });
+
 router.get('/getpoll/:pollid', function (req, res, next) {
   pollModel.findOne({
       _id: req.params.pollid
-  }).exec(function (err, issue) {
-      res.render('poll',{
-        issue:issue
-      });
+  }).exec(function (err, poll) {
+      res.render('poll-data');
   });
 });
+
+router.get('/poll1')
 module.exports = router;
