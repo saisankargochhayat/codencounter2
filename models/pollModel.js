@@ -1,31 +1,40 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
 
-var userSchema = new Schema({
-    email: {
+var pollSchema = new Schema({
+    name: {
         type: String,
         required: true
     },
-    password: {
+    description: {
         type: String,
         required: true
     },
-    quantity: {
-        type: [Number],
-        required: true,
-        default: [1]
-    },
-    unit: {
+    city: {
         type: String,
-        required: true
+        Default: "Default"
     },
-    categories: [String],
-    calculationMethod: String,
-    components: [{
+    upvotes: Number,
+    options: [{
+        key: String,
         name: String,
-        quantity: [Number],
-        unit: String
-    }]
+        description: String,
+        votes:[ObjectId]
+    }],
+    resolved: {
+        success: {
+            type: Boolean,
+            default: false
+        },
+        mesasge: {
+            type: String,
+            default: false
+        } 
+    }
+}, {
+    collection: 'polls',
+    timestamps: true
 })
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Poll', pollSchema);

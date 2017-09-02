@@ -1,31 +1,48 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var Schema = mongoose.Schema,
+    ObjectId = Schema.ObjectId;
 
-var userSchema = new Schema({
-    email: {
+var issueSchema = new Schema({
+    name: {
         type: String,
         required: true
     },
-    password: {
+    description: {
         type: String,
         required: true
     },
-    quantity: {
-        type: [Number],
+    issue_location: {
+        lat: String,
+        long: String
+    },
+    upvotes: {
+        type: [ObjectId],
         required: true,
-        default: [1]
+        default: []
     },
-    unit: {
-        type: String,
-        required: true
+    downvotes: {
+        type: [ObjectId],
+        required: true,
+        default: []
     },
-    categories: [String],
-    calculationMethod: String,
-    components: [{
-        name: String,
-        quantity: [Number],
-        unit: String
-    }]
+    marked_for_consideration: {
+        type: Boolean,
+        required: true,
+        default: false
+    },
+    resolved: {
+        success: {
+            type: Boolean,
+            default: false
+        },
+        mesasge: {
+            type: String,
+            default: false
+        } 
+    }
+}, {
+    collection: 'issues',
+    timestamps: true
 })
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('Issue', issueSchema);
