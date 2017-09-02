@@ -15,6 +15,17 @@ router.get('/signup',function(req,res,next) {
   res.redirect('/signup.html');
 });
 
+router.get('/dashboard',helpers.is_authenticated,function(req,res,next){
+  UserModel.findOne({email:req.session.user.email},function(err,user) {
+    if(err) {
+      console.log(err);
+      res.send(err);
+    }else{
+      res.render('dashboard',user);
+    }
+  })
+});
+
 router.post('/signup',function(req,res,next) {
   console.log(req.body);
   var user = new UserModel({
@@ -33,7 +44,7 @@ router.post('/signup',function(req,res,next) {
       res.send(err);
     }else {
       req.session.user = newUser;
-      res.send("successfully signed up");
+      res.redirect('/users/dashboard');
     }
   });
 });
@@ -46,7 +57,7 @@ router.post('/signin',function(req,res,next) {
     }else {
       if(user) {
         req.session.user = user;
-        res.send("successfully logged in.")
+        res.redirect('/users/dashboard');
       }else {
         res.send("Wrong credentials.")
       }
