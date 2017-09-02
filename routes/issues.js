@@ -11,7 +11,7 @@ router.get('/', function(req, res , next) {
             {console.log(i)
               getIssues.push(issues[i]);
             }
-              res.send(getIssues);
+        res.render('issues',{issues:getIssues});
        });
 
   });
