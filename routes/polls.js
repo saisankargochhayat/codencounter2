@@ -13,21 +13,12 @@ router.get('/', function (req, res, next) {
           console.log(i)
           getIssues.push(issues[i]);
       }
-      res.send(getIssues);
+      res.render('polls',{
+        polls:getIssues
+      });
   });
 });
-router.get('/', function (req, res, next) {
-  var getIssues = []
-  pollModel.find().sort({
-      upvotes: -1
-  }).exec(function (err, issues) {
-      for (i in issues) {
-          console.log(i)
-          getIssues.push(issues[i]);
-      }
-      res.send(getIssues);
-  });
-});
+
 router.get('/getpoll/:pollid', function (req, res, next) {
   pollModel.findOne({
       _id: req.params.pollid
