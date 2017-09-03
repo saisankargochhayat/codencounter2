@@ -175,8 +175,9 @@ function createLayer(points,gradient) {
 $(document).ready(function() {
 	$.ajax({
 		method : 'GET',
-		url : '/polls/api/'+'59ab288978387212d72a3ec2',
+		url : '/polls/api/'+'<%=poll._id%>',
 		success : function(data) {
+			console.log(data)
 			var poll = data.poll;
 			var option1 = poll.options[0].votes;
 			var option2 = poll.options[1].votes;
