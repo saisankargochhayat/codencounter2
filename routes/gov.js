@@ -79,6 +79,24 @@ router.post('/resolve/:issueid', function (req, res, next) {
         })
     });
 });
+router.post('/reject/:issueid', function (req, res, next) {
+    var query = {
+        _id: req.params.issueid
+    };
+    issueModel.findOne({
+        _id: req.params.issueid
+    }, function (err, doc) {
+      console.log(req.body.msg);
+        issueModel.update(query, {
+            resolved: {
+              success: false,
+              mesasge: req.body.msg
+            }
+        }, function (err, doc) {
+            res.send(doc);
+        })
+    });
+});
 router.get('/dashboard',function(req,res,next) {
   res.render('gov_dashboard');
 })
