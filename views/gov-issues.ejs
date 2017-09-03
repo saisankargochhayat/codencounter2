@@ -108,14 +108,18 @@
 																		</div>
 																	</a>
 																	<div class="col-md-2">
-																			<% if(issue.marked_for_consideration) {
-																			%>
-																			<h4 style="color:green">Under Review</h4>
-																			<%}
-																			else{
-																			%>
-                                      <div class='btn btn-success' onclick="mark('<%=issue._id%>')">Mark for consideration</div>
-                                      <%
+																		<% if(!issue.marked_for_consideration) {%>
+																			<div class='btn btn-success' onclick="mark('<%=issue._id%>')">Mark for consideration</div>
+																		<%}else{
+																			if(issue.resolved.mesasge == 'false') {%>
+																				<h4 style="margin-top:10%;color:blue">Under Review</h4>
+																			<%} else {
+																				if(issue.resolved.success) {%>
+																					<h4 style="margin-top:10%;color:green">Accepted</h4>
+																				<%}else{%>
+																					<h4 style="margin-top:10%;color:red">Rejected</h4>
+																				<%}
+																			}
 																		}%>
 																	</div>
                                 </div>

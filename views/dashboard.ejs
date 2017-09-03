@@ -5,7 +5,7 @@
 	<link rel="icon" type="image/png" href="/assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Smart City App</title>
+	<title>Temple City App</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -29,11 +29,17 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-
+    <style>
+        #bg {
+    background-image: url('/BBSR.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+    </style>
 </head>
 <body>
 
-<div class="wrapper">
+<div class="wrapper" id='bg'>
 <%- include side-bar.ejs %>
     <div class="main-panel">
         <nav class="navbar navbar-default navbar-fixed">
@@ -76,30 +82,19 @@
 																    <option>Yes</option>
 																    <option>No</option>
 																    <option>Don't care</option>
-																  </select>
+																  </select>                    
+                                                                    <button class="btn btn-primary" type="submit">Submit</button>                                                                  
 																</div>
                             </div>
                         </div>
                     </div>
-					<div class="col-md-4">
-                        <div class="card">
-                            <div class="header">
-                            </div>
-                            <div class="content">
-																<span>Should Bhubaneswar invest in solar powered energy?</span>
-																<div class="form-group">
-																  <label><a href="#">Visit :)</a></label>
-																</div>
-                            </div>
-                        </div>
-                        
-                    </div>
-                    <div class="col-md-4">
+					
+                    <div class="col-md-8">
                         <div class="card">
                             <div class="header">
                             <h3>News Daily</h3>
                             </div>
-                            <div class="content" id='news'>
+                            <div class="content list-group"  id='news'>
 
                             </div>
                         </div>
@@ -147,7 +142,7 @@ $.getJSON("https://newsapi.org/v1/articles?source=the-times-of-india&sortBy=top&
     var htmlText = '';
 
             for ( var i =0; i<7;i++ ) {
-                htmlText += '<hr><a href='+ myjson.articles[i].url+'><p class="p-name">' + myjson.articles[i].title + '</p></a></hr>';
+                htmlText += '<a href='+ myjson.articles[i].url+' class="list-group-item"><p class="p-name">' + myjson.articles[i].title + '</p></a>';
             }
     console.log(htmlText)
     ele.append(htmlText);

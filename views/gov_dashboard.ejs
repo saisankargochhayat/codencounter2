@@ -5,7 +5,7 @@
 	<link rel="icon" type="image/png" href="/assets/img/favicon.ico">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-	<title>Trade Simulator Dashboard</title>
+	<title>Temple City App</title>
 
 	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -29,11 +29,17 @@
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="/assets/css/pe-icon-7-stroke.css" rel="stylesheet" />
-
+    <style>
+        #bg {
+    background-image: url('/BBSR.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+}
+    </style>
 </head>
 <body>
 
-<div class="wrapper">
+<div class="wrapper" id='bg'>
 <%- include gov-sidebar.ejs %>
     <div class="main-panel">
         <nav class="navbar navbar-default navbar-fixed">
@@ -50,7 +56,7 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="/users/signou">
+                            <a href="/users/signout">
                                 Log out
                             </a>
                         </li>
@@ -66,13 +72,33 @@
                     <div class="col-md-4">
                         <div class="card">
                             <div class="header">
-                                <a href="/polls/"><h4 class="title">Polls</h4></a>
-                                <p class="category">Latest Polls</p>
+															<h3 class="title">Poll of the month</h3>
                             </div>
                             <div class="content">
-                                <div id="commodity_chart" class="ct-chart ct-perfect-fourth"></div>
+																<h4>Should Bhubaneswar invest in solar powered energy?</h4>
+																<div class="form-group">
+																  <label for="sel1">Vote:</label>
+																  <select class="form-control" id="sel1">
+																    <option>Yes</option>
+																    <option>No</option>
+																    <option>Don't care</option>
+																  </select>                    
+                                                                    <button class="btn btn-primary" type="submit">Submit</button>                                                                  
+																</div>
                             </div>
                         </div>
+                    </div>
+					
+                    <div class="col-md-8">
+                        <div class="card">
+                            <div class="header">
+                            <h3>News Daily</h3>
+                            </div>
+                            <div class="content list-group"  id='news'>
+
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -108,6 +134,19 @@
 
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="/assets/js/demo.js"></script>
+    <script>var myjson;
+$.getJSON("https://newsapi.org/v1/articles?source=the-times-of-india&sortBy=top&apiKey=5aa260d849394fcb8f44222799325b3d", function(json){
+    myjson = json;
+    console.log(myjson.articles[0].title)
+    var ele = $('#news');
+    var htmlText = '';
+
+            for ( var i =0; i<7;i++ ) {
+                htmlText += '<a href='+ myjson.articles[i].url+' class="list-group-item"><p class="p-name">' + myjson.articles[i].title + '</p></a>';
+            }
+    console.log(htmlText)
+    ele.append(htmlText);
+});</script>
 
 </body>
 </html>
