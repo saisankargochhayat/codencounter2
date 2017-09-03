@@ -30,7 +30,7 @@ router.get('/getpoll/:pollid', function (req, res, next) {
   pollModel.findOne({
       _id: req.params.pollid
   }).exec(function (err, poll) {
-      res.render('poll-data',{poll:poll});
+      res.render('poll',{poll:poll});
   });
 });
 
