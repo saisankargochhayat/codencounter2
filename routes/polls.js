@@ -12,7 +12,9 @@ router.get('/', function (req, res, next) {
       for (i in issues) {
           getIssues.push(issues[i]);
       }
-      res.send(getIssues);
+      res.render('polls',{
+        polls:getIssues
+      });
   });
 });
 

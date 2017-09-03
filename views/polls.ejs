@@ -93,9 +93,9 @@
 															for(var i = 0; i < polls.length; i++) {
 																var poll = polls[i];
 															%>
-                                <div class="row issuerow" id='<%=issue._id%>'>
+                                <div class="row issuerow" id='<%=poll._id%>'>
 																	<div class="col-md-1 vote">
-																		<div class="row upvote" onclick="upvote('<%=issue._id%>')">
+																		<div class="row upvote" onclick="upvote('<%=poll._id%>')">
 																			<i class="fa fa-chevron-up" aria-hidden="true"></i>
 																		</div>
 																		<div class="row">
@@ -103,25 +103,18 @@
 																				<%=poll.upvotes%>
 																			</p>
 																		</div>
-																		<div class="row downvote" onclick="downvote('<%=issue._id%>')">
+																		<div class="row downvote" onclick="downvote('<%=poll._id%>')">
 																			<i class="fa fa-chevron-down" aria-hidden="true"></i>
 																		</div>
 																	</div>
-																	<a href="/issues/getissue/<%=issue._id%>">
+																	<a href="/polls/getissue/<%=poll._id%>">
 																		<div class="col-md-8" style="cursor:pointer">
 																			<h4 style="margin-top:0px"><%=poll.name%></h4>
 																			<h6 style="font-weight:500"><%=poll.description%></h5>
 																		</div>
 																	</a>
 																	<div class="col-md-2">
-																		<!-- <h4 style="margin-top:10%;">
-																			<% if(issue.marked_for_consideration) {
-																			%>
-																			Reviewing
-																			<%}
-																			else{
-																			%>Pending<%
-																		}%></h4> -->
+
 																	</div>
                                 </div>
 																<%}%>
@@ -163,28 +156,28 @@
 	<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
 	<script src="/assets/js/demo.js"></script>
 <script type="text/javascript">
-function upvote(id) {
-	$.ajax({
-		method : 'GET',
-		url : '/issues/upvote/'+id,
-		success : function(data) {
-			$('#'+id+' .upvoteCount').html(data.votes);
-			$('#'+id+' .upvote').attr('onclick',null);
-			$('#'+id+' .downvote').attr('onclick','downvote("'+id+'")');
-		}
-	});
-}
-function downvote(id) {
-	$.ajax({
-		method : 'GET',
-		url : '/issues/downvote/'+id,
-		success : function(data) {
-			$('#'+id+' .upvoteCount').html(data.votes);
-			$('#'+id+' .downvote').attr('onclick',null);
-			$('#'+id+' .upvote').attr('onclick','upvote("'+id+'")');
-		}
-	});
-}
+// function upvote(id) {
+// 	$.ajax({
+// 		method : 'GET',
+// 		url : '/issues/upvote/'+id,
+// 		success : function(data) {
+// 			$('#'+id+' .upvoteCount').html(data.votes);
+// 			$('#'+id+' .upvote').attr('onclick',null);
+// 			$('#'+id+' .downvote').attr('onclick','downvote("'+id+'")');
+// 		}
+// 	});
+// }
+// function downvote(id) {
+// 	$.ajax({
+// 		method : 'GET',
+// 		url : '/issues/downvote/'+id,
+// 		success : function(data) {
+// 			$('#'+id+' .upvoteCount').html(data.votes);
+// 			$('#'+id+' .downvote').attr('onclick',null);
+// 			$('#'+id+' .upvote').attr('onclick','upvote("'+id+'")');
+// 		}
+// 	});
+// }
 </script>
 </body>
 </html>
