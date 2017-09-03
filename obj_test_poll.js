@@ -21,12 +21,12 @@ mongoose.connection.on('disconnected', () => {
 });
 
 var Poll = require('./models/pollModel.js')
-var obj = new Poll();
-obj.name = "Construction of over-bridge";
-obj.description = "BMC has been allocated funds to construct an over-bridge to ease traffic in the city";
-obj.city = "Bhubaneswar";
-obj.upvotes = 110;
-obj.options = [{
+var obj1 = new Poll();
+obj1.name = "Construction of over-bridge";
+obj1.description = "BMC has been allocated funds to construct an over-bridge to ease traffic in the city";
+obj1.city = "Bhubaneswar";
+obj1.upvotes = 110;
+obj1.options = [{
     name: "OUAT to Airport, Bhubaneswar",
     votes: []
   },
@@ -36,27 +36,12 @@ obj.options = [{
   }
 ];
 
-var obj = new Poll();
-obj.name = "Construction of over-bridge";
-obj.description = "BMC has been allocated funds to construct an over-bridge to ease traffic in the city";
-obj.city = "Bhubaneswar";
-obj.upvotes = 110;
-obj.options = [{
-    name: "OUAT to Airport, Bhubaneswar",
-    votes: []
-  },
-  {
-    name: "Jayadev Vihar to Nandankanan",
-    votes: []
-  }
-];
-
-var obj = new Poll();
-obj.name = "Install WiFi routers";
-obj.description = "Install WiFi routers for free internet accessibility";
-obj.city = "Bhubaneswar";
-obj.upvotes = 67;
-obj.options = [{
+var obj2 = new Poll();
+obj2.name = "Install WiFi routers";
+obj2.description = "Install WiFi routers for free internet accessibility";
+obj2.city = "Bhubaneswar";
+obj2.upvotes = 67;
+obj2.options = [{
     name: "Nandankanan Road, Bhubaneswar",
     votes: []
   },
@@ -66,12 +51,12 @@ obj.options = [{
   }
 ];
 
-var obj = new Poll();
-obj.name = "Construction of Cycle-Track";
-obj.description = "Constructing Cycle-track in the city for safety of school students";
-obj.city = "Bhubaneswar";
-obj.upvotes = 56;
-obj.options = [{
+var obj3 = new Poll();
+obj3.name = "Construction of Cycle-Track";
+obj3.description = "Constructing Cycle-track in the city for safety of school students";
+obj3.city = "Bhubaneswar";
+obj3.upvotes = 56;
+obj3.options = [{
     name: "Unit - 8, Bhubaneswar",
     votes: []
   },
@@ -144,9 +129,13 @@ for (var i =0;i<19;i++){
   });
 }
 
-obj.save(function(err){
-  if ( err ) throw err;
-  console.log("Object Saved Successfully");
-});
-console.log(obj.options[1].votes);
+var ar = [obj1,obj2,obj3];
+for (i in ar){
+  ar[i].save(function(err){
+    if ( err ) throw err;
+    console.log("Object Saved Successfully");
+  });
+}
+
+// console.log(obj.options[1].votes);
 mongoose.connection.close();
