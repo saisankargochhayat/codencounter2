@@ -94,20 +94,7 @@
 																var poll = polls[i];
 															%>
                                 <div class="row issuerow" id='<%=poll._id%>'>
-																	<div class="col-md-1 vote">
-																		<div class="row upvote" onclick="upvote('<%=poll._id%>')">
-																			<i class="fa fa-chevron-up" aria-hidden="true"></i>
-																		</div>
-																		<div class="row">
-																			<p class='upvoteCount'>
-																				<%=poll.upvotes%>
-																			</p>
-																		</div>
-																		<div class="row downvote" onclick="downvote('<%=poll._id%>')">
-																			<i class="fa fa-chevron-down" aria-hidden="true"></i>
-																		</div>
-																	</div>
-																	<a href="/polls/getissue/<%=poll._id%>">
+																		<a href="/polls/getissue/<%=poll._id%>">
 																		<div class="col-md-8" style="cursor:pointer">
 																			<h4 style="margin-top:0px"><%=poll.name%></h4>
 																			<h6 style="font-weight:500"><%=poll.description%></h5>

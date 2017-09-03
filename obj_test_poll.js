@@ -96,8 +96,9 @@ for (var i =0;i<30;i++){
   obj.options[1].votes.push({
     lat: String(latitute),
     long: String(longitude)
-  }
   });
+}
+  
 
 for (var i =0;i<20;i++){
   var latitute = (Math.random() * (20.313537 - 20.302429) + 20.302429).toFixed(6);
