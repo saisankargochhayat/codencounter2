@@ -68,7 +68,7 @@ router.post('/signin',function(req,res,next) {
 
 router.get('/signout',function(req,res,next) {
   req.session.user = null;
-  res.send("successfully logged out");
+  res.redirect('/signin.html');
 })
 
 module.exports = router;
