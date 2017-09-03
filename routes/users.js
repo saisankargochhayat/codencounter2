@@ -29,6 +29,7 @@ router.get('/dashboard',helpers.is_authenticated,function(req,res,next){
 router.post('/signup',function(req,res,next) {
   console.log(req.body);
   var user = new UserModel({
+    name : req.body.name,
     email : req.body.email,
     password : req.body.password,
     aadhar : req.body.aadhar,
