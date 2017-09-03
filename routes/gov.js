@@ -25,7 +25,7 @@ router.get('/polls', function (req, res, next) {
       for (i in issues) {
           getIssues.push(issues[i]);
       }
-      res.render('polls',{
+      res.render('gov-polls',{
         polls:getIssues
       });
   });
@@ -39,6 +39,13 @@ router.get('/getissue/:issueid', function (req, res, next) {
           issue:issue
         });
     });
+});
+router.get('/getpoll/:pollid', function (req, res, next) {
+  pollModel.findOne({
+      _id: req.params.pollid
+  }).exec(function (err, poll) {
+      res.render('poll-data',{poll:poll});
+  });
 });
 router.get('/mark/:issueid', function (req, res, next) {
     var query = {
