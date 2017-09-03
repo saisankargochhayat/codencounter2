@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var issueModel = require('../models/issueModel');
+var pollModel = require('../models/pollModel');
 var helpers = require('../helpers');
-router.get('/', function (req, res, next) {
+router.get('/issues', function (req, res, next) {
     var getIssues = []
     issueModel.find().sort({
         upvotes: -1
@@ -15,8 +16,21 @@ router.get('/', function (req, res, next) {
           issues:getIssues
         });
     });
-
 });
+router.get('/polls', function (req, res, next) {
+  var getIssues = []
+  pollModel.find().sort({
+      upvotes: -1
+  }).exec(function (err, issues) {
+      for (i in issues) {
+          getIssues.push(issues[i]);
+      }
+      res.render('polls',{
+        polls:getIssues
+      });
+  });
+});
+
 router.get('/getissue/:issueid', function (req, res, next) {
     issueModel.findOne({
         _id: req.params.issueid
@@ -58,4 +72,7 @@ router.post('/resolve/:issueid', function (req, res, next) {
         })
     });
 });
+router.get('/dashboard',function(req,res,next) {
+  res.render('gov_dashboard');
+})
 module.exports = router;

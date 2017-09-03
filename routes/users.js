@@ -45,7 +45,11 @@ router.post('/signup',function(req,res,next) {
       res.send(err);
     }else {
       req.session.user = newUser;
-      res.redirect('/users/dashboard');
+      if(user.name == 'government'){
+        res.redirect('/gov/dashboard');
+      }else{
+        res.redirect('/users/dashboard');
+      }
     }
   });
 });
@@ -58,9 +62,13 @@ router.post('/signin',function(req,res,next) {
     }else {
       if(user) {
         req.session.user = user;
-        res.redirect('/users/dashboard');
+        if(user.name == 'government'){
+          res.redirect('/gov/dashboard');
+        }else{
+          res.redirect('/users/dashboard');
+        }
       }else {
-        res.send("Wrong credentials.")
+        res.redirect("/users/signin")
       }
     }
   });
