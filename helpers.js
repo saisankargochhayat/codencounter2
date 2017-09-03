@@ -3,7 +3,7 @@ var helper = {
     if(req.session && req.session.user) {
       next()
     } else {
-      res.send("You must be logged in to access this.")
+      res.redirect("/users/signin")
     }
   }
 };
